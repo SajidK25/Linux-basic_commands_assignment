@@ -115,3 +115,24 @@ drwxr-xr-x 4 devops devops 4096 অক্টোবর    7 19:17 ..
 -rwxr----- 1 root   sqa       0 অক্টোবর    7 22:42 file2
 -rwxr----- 1 root   sqa       0 অক্টোবর    7 22:45 file4
 ```
+## Add the user to the new group
+```shell
+tech99@tech99:/home/devops$ sudo useradd -g sqa sretech99@tech99:/home/devops$ sudo passwd sre
+New password: 
+Retype new password: 
+passwd: password updated successfully
+```
+## Create a file called crash.in ( File should contain the word crash in it ) in different directories and then find the file in all the locations using find command
+```shell
+tech99@tech99:/home/devops$ sudo su
+root@tech99:/home/devops# echo "crash" > ubuntu-is-the-best/crash.in
+root@tech99:/home/devops# echo "crash" > os-concepts/crash.in
+root@tech99:/home/devops# cd 
+root@tech99:~# find / -type f -name "crash.in"
+/home/devops/ubuntu-is-the-best/crash.in
+/home/devops/os-concepts/crash.in
+```
+## Then, replace the lines with crash to broken to all files ( use sed, xargs )
+```shell
+find / -type f -name "crash.in" -print0 | xargs -0 sed -i 's/crash/broken/g'
+```
